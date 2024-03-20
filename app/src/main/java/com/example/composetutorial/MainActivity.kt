@@ -1,6 +1,6 @@
 package com.example.composetutorial
 
-import android.content.res.Configuration
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -31,7 +31,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composetutorial.ui.theme.ComposeTutorialTheme
 
@@ -41,12 +40,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeTutorialTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    // MessageCard(msg = Message("Kevin", "Jetpack Compose"))
+                    Conversation(SampleData.conversationSample)
                 }
             }
 
@@ -64,7 +62,7 @@ fun MessageCard(msg: Message) {
             .padding(all = 8.dp)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.perfil2),
+            painter = painterResource(id = R.drawable.lexi),
             contentDescription = "my Profile picture",
             Modifier
                 .size(40.dp)
@@ -82,7 +80,7 @@ fun MessageCard(msg: Message) {
                 MaterialTheme.colorScheme.primary
             } else {
                 MaterialTheme.colorScheme.surface
-            }
+            }, label = ""
         )
         Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
             Text(text = msg.author, color = MaterialTheme.colorScheme.secondary)
@@ -132,20 +130,6 @@ fun Conversation(messages: List<Message>) {
     }
 }
 
-@Preview(name = "Light Mode")
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode")
-@Composable
-fun PreviewMessageCard() {
-    ComposeTutorialTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            Conversation(SampleData.conversationSample)
-
-        }
-    }
-
-}
 
 /**
  * SampleData for Jetpack Compose Tutorial
